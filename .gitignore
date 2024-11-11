@@ -1,1 +1,4 @@
 /__pycache__
+/build
+/*.egg-info
+/pyfmm-gui/__pycache__
