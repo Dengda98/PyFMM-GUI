@@ -39,6 +39,10 @@ class MainWindow(QMainWindow):
         self.clearRcvButton.clicked.connect(self.clear_rcv)
         self.updateVelButton.clicked.connect(self.update_velocity)
         self.redoButton.clicked.connect(self.redo_rcv)
+        self.checkBox_chooseSrc.stateChanged.connect(self.choose_source_state)
+
+        # 成员变量，确定此时的鼠标是选择震源状态还是选择接收点状态
+        self.mouse_choose_source:bool = False
 
         # 定义参数
         self.plot_param = {}
@@ -46,6 +50,10 @@ class MainWindow(QMainWindow):
         self.clear_rcv()
 
         self.update_velocity()
+
+    def write_lineEdit_src(self, x, y):
+        self.lineEdit_srcX.setText(f"{x:.4f}")
+        self.lineEdit_srcY.setText(f"{y:.4f}")
 
     def update_srcloc(self):
         self.plot_param['srcloc'] = [float(self.lineEdit_srcX.text()), float(self.lineEdit_srcY.text())]
@@ -89,6 +97,12 @@ class MainWindow(QMainWindow):
         for line in lines:
             self.textBrowser_rcv.append(line)
 
+    def choose_source_state(self, state):
+        if state == 2:  # 选中
+            self.mouse_choose_source = True 
+        else:
+            self.mouse_choose_source = False
+
     @try_except_decorator("statusBar")
     def update_velocity(self, *args):
         namespace = {"np":np}
@@ -129,8 +143,12 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(f"Done.", 1000)
 
 
-if __name__ == '__main__':
+def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
