@@ -59,27 +59,36 @@ class MatplotlibWidget(QWidget):
 
     def on_mouse_click(self, event):
         # 检查鼠标是否在坐标轴区域内
-        if event.inaxes and self.TT is not None:
-            x, y = event.xdata, event.ydata
-            
-            # 射线追踪
-            rcvloc = [x, y, 0]
+        if not event.inaxes or self.TT is None:
+            return 
+        
+        x, y = event.xdata, event.ydata  
 
-            travt, rays = pyfmm.raytracing(
-                self.TT, [*self.srcloc, 0.0], rcvloc, self.xarr, self.yarr, self.zarr, 0.1)
-            rays_hdl, = self.axes.plot(rays[:,0], rays[:,1], c='b', lw=1, ls='--')
+        # 如果现在是鼠标选择震源，则需另外处理 
+        if self.parent().mouse_choose_source:
+            self.parent().clear_rcv()
+            self.parent().write_lineEdit_src(x, y)
+            self.plot([x,y], self.xarr, self.yarr, self.vel2d)
+            return
+        
+        # 射线追踪
+        rcvloc = [x, y, 0]
 
-            # 在图形上标记点击点
-            dots_hdl, = self.axes.plot(x, y, 'ro', markersize=3.0)
-            self.axes.set_xlim([self.xarr[0], self.xarr[-1]])
-            self.axes.set_ylim([self.yarr[0], self.yarr[-1]])
+        travt, rays = pyfmm.raytracing(
+            self.TT, [*self.srcloc, 0.0], rcvloc, self.xarr, self.yarr, self.zarr, 0.1)
+        rays_hdl, = self.axes.plot(rays[:,0], rays[:,1], c='b', lw=1, ls='--')
 
-            self.canvas.draw()
+        # 在图形上标记点击点
+        dots_hdl, = self.axes.plot(x, y, 'ro', markersize=3.0)
+        self.axes.set_xlim([self.xarr[0], self.xarr[-1]])
+        self.axes.set_ylim([self.yarr[0], self.yarr[-1]])
 
-            self.plot_handle['rays'].append(rays_hdl)
-            self.plot_handle['rcvdots'].append(dots_hdl)
+        self.canvas.draw()
 
-            self.parent().textBrowser_rcv.append(f"{x:8.4f} {y:8.4f} {travt:6.2f}")
+        self.plot_handle['rays'].append(rays_hdl)
+        self.plot_handle['rcvdots'].append(dots_hdl)
+
+        self.parent().textBrowser_rcv.append(f"{x:8.4f} {y:8.4f} {travt:6.2f}")
 
     def plot_velocity(self, xarr, yarr, vel2d):
         self.TT = None
