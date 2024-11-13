@@ -18,7 +18,7 @@ import os, sys
 from scipy.ndimage import gaussian_filter
 
 from .subwidget import MatplotlibWidget
-from .utils import try_except_decorator
+from .utils import try_except_decorator, read_version
 
 
 class MainWindow(QMainWindow):
@@ -26,6 +26,9 @@ class MainWindow(QMainWindow):
         super().__init__()
         uic.loadUi(os.path.join(os.path.dirname(__file__), "main.ui"), self)  # 加载 UI 文件
 
+        # 设置标题 
+        self.version = read_version()
+        self.setWindowTitle(f"PyFMM-GUI   v{self.version}")
         
         self.mplwidget = MatplotlibWidget(self)
 
