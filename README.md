@@ -46,4 +46,4 @@
 ```   
 
 
-功能按钮很简单，基本“所见即所得”。其中`Update Velocity`下的文本框是个Python脚本窗口，可以自定义FMM网格范围(`xmax, ymax`，最小值均为0)、划分数(`nx, ny`)，以及2D速度数组`vel2d`。设置好后，点击`Update Velocity`即可计算。
+功能按钮很简单，基本“所见即所得”。其中`Update Velocity`下的文本框是个Python脚本窗口，可以自定义FMM网格范围(`xmax, ymax`，最小值均为0)、划分数(`nx, ny`)(组成`xarr, yarr`)，以及2D速度数组`vel2d`。设置好后，点击`Update Velocity`即可计算。
