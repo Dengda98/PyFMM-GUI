@@ -108,11 +108,13 @@ class MainWindow(QMainWindow):
         namespace = {"np":np}
         exec(self.textEdit_vel.toPlainText(), namespace)
         
-        self.plot_param['xarr'] = np.linspace(0, namespace['xmax'], namespace['nx']).copy()
-        self.plot_param['yarr'] = np.linspace(0, namespace['ymax'], namespace['ny']).copy()
+        # self.plot_param['xarr'] = np.linspace(0, namespace['xmax'], namespace['nx']).copy()
+        # self.plot_param['yarr'] = np.linspace(0, namespace['ymax'], namespace['ny']).copy()
+        # vel2d = namespace['vel2d'].copy()
+        self.plot_param['xarr'] = namespace['xarr'].copy()
+        self.plot_param['yarr'] = namespace['yarr'].copy()
         vel2d = namespace['vel2d'].copy()
         vel2d[vel2d < 0.0] = 0.1
-
         self.plot_param['vel2d'] = vel2d
 
         self.clear_rcv()
