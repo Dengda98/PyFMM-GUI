@@ -22,6 +22,8 @@
   ```bash
   # vx.x.x指代Release中的版本号，建议下载最新稳定版本
   pip install -v git+https://github.com/Dengda98/PyFMM-GUI@vx.x.x
+  # 若网速不好可改为gitee镜像
+  # pip install -v git+https://gitee.com/Dengda98/PyFMM-GUI@vx.x.x
   ```
 
 
@@ -47,3 +49,8 @@
 
 
 功能按钮很简单，基本“所见即所得”。其中`Update Velocity`下的文本框是个Python脚本窗口，可以自定义FMM网格范围(`xmax, ymax`，最小值均为0)、划分数(`nx, ny`)(组成`xarr, yarr`)，以及2D速度数组`vel2d`。设置好后，点击`Update Velocity`即可计算。
+
+
+## 其它
+如果遇到bug，欢迎联系我(zhudengda@mail.iggcas.ac.cn)，我会完善！
+也欢迎提出建议和更多示例！
