@@ -8,12 +8,20 @@ def read_version():
         exec(f.read())
     return locals()['__version__']
 
+def read_readme():
+    with open("README.md", encoding="utf-8") as f:
+        return f.read()
+
 setup(
     name='pyfmm_gui',
     version=read_version(),
     description='A simple GUI of PyFMM',
     author='Zhu Dengda',
     author_email='zhudengda@mail.iggcas.ac.cn',
+    long_description=read_readme(),  
+    long_description_content_type="text/markdown", 
+    url="https://github.com/Dengda98/PyFMM-GUI",
+
     packages=find_packages(),
     package_data={'pyfmm_gui': ['main.ui']},
     include_package_data=True,
@@ -21,6 +29,7 @@ setup(
     entry_points={
         'console_scripts': [
             'pyfmm_gui=pyfmm_gui.main:main', 
+            'pyfmm-gui=pyfmm_gui.main:main', 
         ],
     },
 )
