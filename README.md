@@ -25,25 +25,32 @@
     conda install pyqt -c conda-forge
 ```
 
-3、安装本程序    
-有两个选择：
-+ **不提前下载程序包**  
-
-  要求你当前环境中有git工具。这样可直接运行
+3、安装本GUI程序，有多种下载方式：
++ **从[PYPI](https://pypi.org/project/pyfmm-kit/)下载（推荐）**  
+  **最新更新，已将PyFMM-GUI程序源码同步到[PYPI](https://pypi.org/project/pyfmm-kit/)，可直接运行：**  
   ```bash
-  # vx.x.x指代Release中的版本号，建议下载最新稳定版本
-  pip install -v git+https://github.com/Dengda98/PyFMM-GUI@vx.x.x
-  # 若网速不好可改为gitee镜像
-  # pip install -v git+https://gitee.com/Dengda98/PyFMM-GUI@vx.x.x
-  ```
+  pip install -v pyfmm-gui
+  ```  
+  进行安装。各操作平台的wheels后续会逐步支持。
+
++ 从Github下载安装，安装有两个选择：
+  + **不提前下载程序包**  
+
+    要求你当前环境中有git工具。这样可直接运行
+    ```bash
+    # vx.x.x指代Release中的版本号，建议下载最新稳定版本
+    pip install -v git+https://github.com/Dengda98/PyFMM-GUI@vx.x.x 
+    # 若网速不好可改为gitee镜像
+    # pip install -v git+https://gitee.com/Dengda98/PyFMM-GUI@vx.x.x
+    ```
 
 
-+ **提前下载好程序包** 
+  + **提前下载好程序包** 
 
-  **建议在[Release](https://github.com/Dengda98/PyFMM-GUI/releases)中下载最新稳定版本**，不推荐clone，不推荐直接下载主分支。在下载解压后，在程序根目录下运行
-  ```bash
-  pip install -v .
-  ``` 
+    注意代码主页更新频繁，**建议在[Release](https://github.com/Dengda98/PyFMM-GUI/releases)中下载最新稳定版本**，不推荐clone，不推荐直接下载主分支。在下载解压后，在程序根目录下运行
+    ```bash
+    pip install -v .
+    ``` 
 
 这样可安装到你的虚拟环境中。 
 
@@ -51,7 +58,7 @@
 ## 使用
 直接运行
 ```bash 
-    pyfmm_gui
+    pyfmm_gui   # 或者 pyfmm-gui
 ```  
 或者
 ```bash 
