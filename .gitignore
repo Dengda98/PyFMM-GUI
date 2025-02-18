@@ -3,3 +3,4 @@
 /dist
 /*.egg-info
 /pyfmm_gui/__pycache__
+/.vscode
